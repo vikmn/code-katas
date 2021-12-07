@@ -1,19 +1,14 @@
 import {isLeapYear} from "../main/leapYear";
 
 describe("isLeapYear", () => {
-  it('should output false for 1', () => {
-    const actual = isLeapYear(1);
+  it.each([
+    [1, false],
+    [2, false],
+    [3, false],
+    [4, true],
+  ])(`it should convert the year %i to %s`, (year: number, expectedValue: boolean) => {
+    const actual = isLeapYear(year);
 
-    expect(actual).toBeFalsy()
-  });
-  it('should output false for 2', () => {
-    const actual = isLeapYear(2);
-
-    expect(actual).toBeFalsy()
-  });
-  it('should output true for 4', () => {
-    const actual = isLeapYear(4);
-
-    expect(actual).toBeTruthy();
+    expect(actual).toBe(expectedValue)
   });
 })
