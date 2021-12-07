@@ -6,4 +6,9 @@ describe("isLeapYear", () => {
 
     expect(actual).toBeFalsy()
   });
+  it('should output true for 4',  () => {
+    const actual = isLeapYear(4);
+
+    expect(actual).toBeTruthy();
+  });
 })
