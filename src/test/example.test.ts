@@ -1,8 +1,17 @@
-import {Example} from "../main/example";
+import {fizzbuzzify} from "../main/example";
 
-describe('example test', () => {
-    it("should give sum of a + b when adding a and b", () => {
-        let example: Example = new Example();
-        expect(example.add(1, 2)).toBe(3);
-    })
+describe('Fizzbuzz', () => {
+  it.each([
+    [1, '1'],
+    [2, '2'],
+    [3, 'Fizz'],
+    [4, '4'],
+    [5, 'Buzz'],
+    [15, 'FizzBuzz'],
+    [6, 'Fizz'],
+    [10, 'Buzz'],
+    [30, 'FizzBuzz']
+  ])('fizzbuzzify(%i) => %s', (input, result) => {
+    expect(fizzbuzzify(input)).toEqual(result);
+  });
 })
