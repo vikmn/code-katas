@@ -1,4 +1,4 @@
-import {fizzbuzzify} from "../main/example";
+import {fizzbuzzify} from "../main/fizzbuzz";
 
 describe('Fizzbuzz', () => {
   it.each([
