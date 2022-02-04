@@ -7,12 +7,16 @@ export class TicTacToeGame {
     return squares.has(Square.TopLeft) && squares.has(Square.TopMiddle) && squares.has(Square.TopRight)
   }
 
+  private static hasWonMiddleRow(squares: Set<Square>): boolean {
+    return squares.has(Square.MiddleLeft) && squares.has(Square.MiddleMiddle) && squares.has(Square.MiddleRight)
+  }
+
   getStatus() {
-    if (TicTacToeGame.hasWonTopRow(this.playerXSquares)) {
+    if (TicTacToeGame.hasWonTopRow(this.playerXSquares) || TicTacToeGame.hasWonMiddleRow(this.playerXSquares)) {
       return Status.xHasWon
     }
 
-    if (TicTacToeGame.hasWonTopRow(this.playerYSquares)) {
+    if (TicTacToeGame.hasWonTopRow(this.playerYSquares) || TicTacToeGame.hasWonMiddleRow(this.playerYSquares)) {
       return Status.yHasWon
     }
 
@@ -50,7 +54,9 @@ export enum Square {
   TopMiddle,
   BottomMiddle,
   MiddleLeft,
-  BottomRight
+  BottomRight,
+  MiddleMiddle,
+  MiddleRight,
 }
 
 export enum Status {
