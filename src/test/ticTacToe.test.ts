@@ -56,4 +56,26 @@ describe('ticTacToe', () => {
 
     expect(game.getStatus()).toEqual('ON')
   });
+
+  it('should not allow playing in positions Y has played in', () => {
+    const game = new TicTacToeGame();
+
+    game.play(Square.TopLeft)
+    game.play(Square.TopRight)
+
+    expect(() => game.play(Square.TopRight)).toThrowError()
+  });
+
+  it('y should win when played in the top line', () => {
+    const game = new TicTacToeGame();
+
+    game.play(Square.BottomLeft);
+    game.play(Square.TopLeft)
+    game.play(Square.BottomMiddle);
+    game.play(Square.TopMiddle)
+    game.play(Square.MiddleLeft);
+    game.play(Square.TopRight);
+
+    expect(game.getStatus()).toEqual('Y has won')
+  });
 });

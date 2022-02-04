@@ -1,11 +1,21 @@
 export class TicTacToeGame {
   private nextPlayer = Player.X;
   private playerXSquares = new Set<Square>()
+  private playerYSquares = new Set<Square>()
+
+  private static hasWonTopRow(squares: Set<Square>): boolean {
+    return squares.has(Square.TopLeft) && squares.has(Square.TopMiddle) && squares.has(Square.TopRight)
+  }
 
   getStatus() {
-    if (this.playerXSquares.has(Square.TopLeft) && this.playerXSquares.has(Square.TopMiddle) && this.playerXSquares.has(Square.TopRight)) {
+    if (TicTacToeGame.hasWonTopRow(this.playerXSquares)) {
       return Status.xHasWon
     }
+
+    if (TicTacToeGame.hasWonTopRow(this.playerYSquares)) {
+      return Status.yHasWon
+    }
+
     return Status.on
   }
 
@@ -14,15 +24,17 @@ export class TicTacToeGame {
   }
 
   play(square: Square) {
-
-    if (this.playerXSquares.has(square)) {
+    if (this.playerXSquares.has(square) || this.playerYSquares.has(square)) {
       throw new Error(`square ${square} has already been played`);
     }
-    if(this.nextPlayer === Player.X) {
-      this.playerXSquares.add(square)
-    }
-    this.nextPlayer = this.nextPlayer === Player.X ? Player.Y : Player.X
 
+    if (this.nextPlayer === Player.X) {
+      this.playerXSquares.add(square)
+    } else {
+      this.playerYSquares.add(square)
+    }
+
+    this.nextPlayer = this.nextPlayer === Player.X ? Player.Y : Player.X
   }
 }
 
@@ -37,9 +49,12 @@ export enum Square {
   BottomLeft,
   TopMiddle,
   BottomMiddle,
+  MiddleLeft,
+  BottomRight
 }
 
 export enum Status {
   on = "ON",
   xHasWon = "X has won",
+  yHasWon = "Y has won",
 }
