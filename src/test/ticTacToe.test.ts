@@ -46,4 +46,14 @@ describe('ticTacToe', () => {
 
     expect(game.getStatus()).toEqual('X has won')
   });
+
+  it('x should win when played in the top line', () => {
+    const game = new TicTacToeGame();
+
+    game.play(Square.TopLeft)
+    game.play(Square.TopMiddle);
+    game.play(Square.TopRight)
+
+    expect(game.getStatus()).toEqual('ON')
+  });
 });

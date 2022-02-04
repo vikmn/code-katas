@@ -1,9 +1,9 @@
 export class TicTacToeGame {
   private nextPlayer = Player.X;
-  private playedSquares = new Set<Square>()
+  private playerXSquares = new Set<Square>()
 
   getStatus() {
-    if (this.playedSquares.has(Square.TopLeft) && this.playedSquares.has(Square.TopMiddle) && this.playedSquares.has(Square.TopRight)) {
+    if (this.playerXSquares.has(Square.TopLeft) && this.playerXSquares.has(Square.TopMiddle) && this.playerXSquares.has(Square.TopRight)) {
       return Status.xHasWon
     }
     return Status.on
@@ -14,13 +14,15 @@ export class TicTacToeGame {
   }
 
   play(square: Square) {
-    this.nextPlayer = this.nextPlayer === Player.X ? Player.Y : Player.X
 
-    if (this.playedSquares.has(square)) {
+    if (this.playerXSquares.has(square)) {
       throw new Error(`square ${square} has already been played`);
     }
+    if(this.nextPlayer === Player.X) {
+      this.playerXSquares.add(square)
+    }
+    this.nextPlayer = this.nextPlayer === Player.X ? Player.Y : Player.X
 
-    this.playedSquares.add(square)
   }
 }
 
