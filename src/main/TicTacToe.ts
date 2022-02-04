@@ -1,22 +1,61 @@
+export enum Player {
+  X = 'X',
+  Y = 'Y',
+}
+
+export enum Square {
+  TopLeft,
+  TopRight,
+  BottomLeft,
+  TopMiddle,
+  BottomMiddle,
+  MiddleLeft,
+  BottomRight,
+  MiddleMiddle,
+  MiddleRight,
+}
+
+export enum Status {
+  on = "ON",
+  xHasWon = "X has won",
+  yHasWon = "Y has won",
+}
+
 export class TicTacToeGame {
   private nextPlayer = Player.X;
   private playerXSquares = new Set<Square>()
   private playerYSquares = new Set<Square>()
 
+  private static readonly TopHorizontalLine = [Square.TopLeft, Square.TopMiddle, Square.TopRight];
+  private static readonly MiddleHorizontalLine = [Square.MiddleLeft, Square.MiddleMiddle, Square.MiddleRight]
+  private static readonly BottomHorizontalLine = [Square.BottomLeft, Square.BottomMiddle, Square.BottomRight]
+
+  private static hasLine(playedSquares: Set<Square>, squares: Square[]) {
+    return squares.every(square => playedSquares.has(square))
+  }
+
   private static hasWonTopRow(squares: Set<Square>): boolean {
-    return squares.has(Square.TopLeft) && squares.has(Square.TopMiddle) && squares.has(Square.TopRight)
+    return this.hasLine(squares, this.TopHorizontalLine)
   }
 
   private static hasWonMiddleRow(squares: Set<Square>): boolean {
-    return squares.has(Square.MiddleLeft) && squares.has(Square.MiddleMiddle) && squares.has(Square.MiddleRight)
+    return this.hasLine(squares, this.MiddleHorizontalLine)
+  }
+
+  private static hasWonBottomRow(squares: Set<Square>): boolean {
+    return this.hasLine(squares, this.BottomHorizontalLine)
+  }
+
+  private static hasWon(squares: Set<Square>): boolean {
+    return TicTacToeGame.hasWonTopRow(squares) || TicTacToeGame.hasWonMiddleRow(squares) || TicTacToeGame.hasWonBottomRow(squares)
   }
 
   getStatus() {
-    if (TicTacToeGame.hasWonTopRow(this.playerXSquares) || TicTacToeGame.hasWonMiddleRow(this.playerXSquares)) {
+    if (TicTacToeGame.hasWon(this.playerXSquares)) {
       return Status.xHasWon
     }
 
-    if (TicTacToeGame.hasWonTopRow(this.playerYSquares) || TicTacToeGame.hasWonMiddleRow(this.playerYSquares)) {
+    if (TicTacToeGame.hasWon(this.playerYSquares)) {
       return Status.yHasWon
     }
 
@@ -40,27 +79,4 @@ export class TicTacToeGame {
 
     this.nextPlayer = this.nextPlayer === Player.X ? Player.Y : Player.X
   }
-}
-
-export enum Player {
-  X = 'X',
-  Y = 'Y',
-}
-
-export enum Square {
-  TopLeft,
-  TopRight,
-  BottomLeft,
-  TopMiddle,
-  BottomMiddle,
-  MiddleLeft,
-  BottomRight,
-  MiddleMiddle,
-  MiddleRight,
-}
-
-export enum Status {
-  on = "ON",
-  xHasWon = "X has won",
-  yHasWon = "Y has won",
 }

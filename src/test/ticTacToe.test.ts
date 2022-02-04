@@ -103,4 +103,29 @@ describe('ticTacToe', () => {
 
     expect(game.getStatus()).toEqual('Y has won')
   });
+
+  it('x should win when played in the Bottom line', () => {
+    const game = new TicTacToeGame();
+
+    game.play(Square.BottomLeft);
+    game.play(Square.MiddleMiddle)
+    game.play(Square.BottomMiddle);
+    game.play(Square.MiddleRight)
+    game.play(Square.BottomRight);
+
+    expect(game.getStatus()).toEqual('X has won')
+  });
+
+  it('y should win when played in the Bottom line', () => {
+    const game = new TicTacToeGame();
+
+    game.play(Square.TopRight);
+    game.play(Square.BottomLeft);
+    game.play(Square.MiddleMiddle)
+    game.play(Square.BottomMiddle);
+    game.play(Square.MiddleRight)
+    game.play(Square.BottomRight);
+
+    expect(game.getStatus()).toEqual('Y has won')
+  });
 });
