@@ -29,6 +29,7 @@ export class TicTacToeGame {
   private static readonly TopHorizontalLine = [Square.TopLeft, Square.TopMiddle, Square.TopRight];
   private static readonly MiddleHorizontalLine = [Square.MiddleLeft, Square.MiddleMiddle, Square.MiddleRight]
   private static readonly BottomHorizontalLine = [Square.BottomLeft, Square.BottomMiddle, Square.BottomRight]
+  private static readonly LeftVerticalLine = [Square.TopLeft, Square.MiddleLeft, Square.BottomLeft]
 
   private static hasLine(playedSquares: Set<Square>, squares: Square[]) {
     return squares.every(square => playedSquares.has(square))
@@ -46,8 +47,12 @@ export class TicTacToeGame {
     return this.hasLine(squares, this.BottomHorizontalLine)
   }
 
+  private static hasWonLeftVertical(squares: Set<Square>): boolean {
+    return this.hasLine(squares, this.LeftVerticalLine)
+  }
+
   private static hasWon(squares: Set<Square>): boolean {
-    return TicTacToeGame.hasWonTopRow(squares) || TicTacToeGame.hasWonMiddleRow(squares) || TicTacToeGame.hasWonBottomRow(squares)
+    return TicTacToeGame.hasWonTopRow(squares) || TicTacToeGame.hasWonMiddleRow(squares) || TicTacToeGame.hasWonBottomRow(squares) || TicTacToeGame.hasWonLeftVertical(squares)
   }
 
   getStatus() {

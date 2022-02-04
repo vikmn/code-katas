@@ -91,6 +91,18 @@ describe('ticTacToe', () => {
     expect(game.getStatus()).toEqual('X has won')
   });
 
+  it('x should win when played in the Left Vertical', () => {
+    const game = new TicTacToeGame();
+
+    game.play(Square.TopLeft)
+    game.play(Square.MiddleMiddle);
+    game.play(Square.MiddleLeft)
+    game.play(Square.BottomMiddle);
+    game.play(Square.BottomLeft)
+
+    expect(game.getStatus()).toEqual('X has won')
+  });
+
   it('Y should win when played in the Middle line', () => {
     const game = new TicTacToeGame();
 
