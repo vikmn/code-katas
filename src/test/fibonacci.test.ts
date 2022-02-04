@@ -1,11 +1,8 @@
 const getFibonacci = (input: number): number => {
-  if (input === 0 ){
-    return 0;
-  }
   if (input >= 2){
     return getFibonacci(input-1)+getFibonacci(input-2);
   }
-  return 1;
+  return input;
 };
 
 describe.each([
