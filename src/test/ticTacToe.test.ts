@@ -1,23 +1,23 @@
 class TicTacToeGame {
-  getPlayedMoves() {
-    return []
+
+
+  getStatus() {
+    return 'ON'
+  }
+
+  nextPlayer() {
+    return Player.X;
   }
 }
-
+enum Player{
+  X='X'
+}
 describe('ticTacToe',  () => {
-  it('should initialise the board', () => {
+  it('should initialise the game', () => {
     const game = new TicTacToeGame();
+    expect(game.getStatus()).toEqual('ON')
 
-    const playedMoves = game.getPlayedMoves();
-
-    expect(playedMoves).toEqual([])
+    expect(game.nextPlayer()).toEqual(Player.X)
   });
 
-  it('should ', () => {
-    const game = new TicTacToeGame();
-
-    const playedMoves = game.getPlayedMoves();
-
-    expect(playedMoves).toEqual([])
-  });
 });
