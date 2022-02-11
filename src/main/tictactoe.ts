@@ -1,13 +1,16 @@
 export class TicTacToe {
-  private state;
+  private state:State;
+  private nextPlayer: string;
 
   constructor() {
-    this.state = State.Started
+    this.state = State.Started;
+    this.nextPlayer= 'X'
   }
 
   getStatus() {
     return ({
-      state: this.state
+      state: this.state,
+      nextPlayer: this.nextPlayer
     });
   }
 }
