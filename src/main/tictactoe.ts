@@ -1,10 +1,15 @@
+interface Player {name:string}
+export enum State {
+  Started
+}
+
 export class TicTacToe {
   private state:State;
-  private nextPlayer: string;
+  private nextPlayer: Player;
 
   constructor() {
     this.state = State.Started;
-    this.nextPlayer= 'X'
+    this.nextPlayer= {name:'X'}
   }
 
   getStatus() {
@@ -15,7 +20,5 @@ export class TicTacToe {
   }
 }
 
-export enum State {
-  Started
-}
+
 
