@@ -1,6 +1,10 @@
-interface Player {name:string}
 export enum State {
   Started
+}
+
+enum Player{
+  X='X',
+  Y='Y',
 }
 
 export class TicTacToe {
@@ -9,7 +13,7 @@ export class TicTacToe {
 
   constructor() {
     this.state = State.Started;
-    this.nextPlayer= {name:'X'}
+    this.nextPlayer= Player.X
   }
 
   getStatus() {
@@ -17,6 +21,16 @@ export class TicTacToe {
       state: this.state,
       nextPlayer: this.nextPlayer
     });
+  }
+
+  play() {
+    if(this.nextPlayer === Player.X) {
+      this.nextPlayer = Player.Y
+      return;
+    }
+    this.nextPlayer = Player.X
+
+
   }
 }
 
